@@ -1,6 +1,6 @@
 # sphinx-config
 
-`docs/conf.py` を **既存設定を保持したまま** 安全に更新するスキル。Sphinx 拡張、MyST optional extensions、テーマ、プロジェクトメタデータの追加・削除を担う。本スキルは **`conf.py` 編集の単一ロジック** を保持する役割であり、他スキル (`sphinx-init`, `sphinx-theme`, `rst-to-myst`) からの委譲先となる。
+`docs/conf.py` を **既存設定を保持したまま** 安全に更新するスキルです。Sphinx 拡張、MyST optional extensions、テーマ、プロジェクトメタデータの追加・削除を担います。本スキルは **`conf.py` 編集の単一ロジック** を保持する役割であり、他スキル (`sphinx-init`, `sphinx-theme`, `rst-to-myst`) からの委譲先となります。
 
 ## 発火条件
 
@@ -11,30 +11,30 @@
 
 ### 1. 既存設定の保持
 
-編集対象セクションのみ変更する。コメント、`sys.path` 操作、その他のユーザー設定はそのまま保持する。
+編集対象セクションのみ変更します。コメント、`sys.path` 操作、その他のユーザー設定はそのまま保持します。
 
 ### 2. 3rd-party 拡張は自動依存追加
 
-3rd-party 拡張を `extensions` に追加する際は、検出した PM で対応コマンドを実行する。
+3rd-party 拡張を `extensions` に追加する際は、検出した PM で対応コマンドを実行します。
 
 ### 3. MyST 拡張変更
 
-`myst_enable_extensions` リストの追加/削除を行う。`linkify` 追加時は対応 PM で `linkify-it-py` を docs 依存に追加する。
+`myst_enable_extensions` リストの追加/削除を行います。`linkify` 追加時は対応 PM で `linkify-it-py` を docs 依存に追加します。
 
 ### 4. バックアップと明示的エラー伝播
 
-編集失敗時の挙動を厳格に規定:
+編集失敗時の挙動を厳格に規定します。
 
 1. 編集前に必ず `conf.py.bak` を作成
 2. **編集失敗時**: `conf.py.bak` から原本を復元したうえで、**元のエラーを必ず例外送出** (復元成功で「正常終了」扱いにしない)
 3. **復元処理自体が失敗した場合**: `conf.py.bak` のパスと手動復元手順を提示して即時例外送出
 4. **編集成功時のみ** `conf.py.bak` を削除
 
-これにより「復元したから OK」というサイレントフェイル実装を仕様レベルで防止する。
+これにより「復元したから OK」というサイレントフェイル実装を仕様レベルで防止します。
 
 ## 拡張カタログ (sphinx-init と共有)
 
-カタログは配布物の自己完結性のため `sphinx-init` と本スキルで重複保持される。
+カタログは配布物の自己完結性のため `sphinx-init` と本スキルで重複保持されます。
 
 ### MyST optional extensions
 
