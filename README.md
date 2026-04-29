@@ -49,7 +49,7 @@ dependencies:
 apm install   # apm.yml の内容で全依存を復元 (target は既存ディレクトリから auto-detect)
 ```
 
-CI や production では drift 防止のため tag/SHA で pin することを推奨 (例: `drillan/sphinx-skills@v0.1.0`。リリース後に利用可)。
+CI や production では drift 防止のため tag/SHA で pin することを推奨 (例: `drillan/sphinx-skills#v0.1.0`。リリース後に利用可)。
 
 APM 本体の導入手順は https://github.com/microsoft/apm を参照 (例: `curl -sSL https://aka.ms/apm-unix | sh`)。
 
