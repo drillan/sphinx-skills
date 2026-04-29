@@ -1,0 +1,3 @@
+name: sphinx-skills
+version: 0.1.0
+description: Sphinx + MyST ドキュメント開発を支援する Agent Skills 集 (6 個)。プロジェクト初期化、conf.py 設定、テーマ管理、ビルド、MyST 記法支援、RST から MyST への移行をカバーする。
