@@ -21,3 +21,7 @@ Thumbs.db
 
 # 内部ドキュメント (設計仕様書・実装計画はリポジトリに含めない)
 /docs/superpowers/
+
+
+# APM dependencies
+apm_modules/
