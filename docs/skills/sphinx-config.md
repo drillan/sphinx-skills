@@ -1,6 +1,6 @@
 # sphinx-config
 
-`docs/conf.py` を **既存設定を保持したまま** 安全に更新するスキルです。Sphinx 拡張、MyST optional extensions、テーマ、プロジェクトメタデータの追加・削除を担います。本スキルは **`conf.py` 編集の単一ロジック** を保持する役割であり、他スキル (`sphinx-init`, `sphinx-theme`, `rst-to-myst`) からの委譲先となります。
+`docs/conf.py` を既存設定を保持したまま安全に更新するスキルです。Sphinx 拡張、MyST optional extensions、テーマ、プロジェクトメタデータの追加・削除を担います。本スキルは `conf.py` 編集の単一ロジックを保持する役割であり、他スキル (`sphinx-init`, `sphinx-theme`, `rst-to-myst`) からの委譲先となります。
 
 ## 発火条件
 
@@ -26,9 +26,9 @@
 編集失敗時の挙動を厳格に規定します。
 
 1. 編集前に必ず `conf.py.bak` を作成
-2. **編集失敗時**: `conf.py.bak` から原本を復元したうえで、**元のエラーを必ず例外送出** (復元成功で「正常終了」扱いにしない)
-3. **復元処理自体が失敗した場合**: `conf.py.bak` のパスと手動復元手順を提示して即時例外送出
-4. **編集成功時のみ** `conf.py.bak` を削除
+2. 編集失敗時: `conf.py.bak` から原本を復元したうえで、元のエラーを必ず例外送出する (復元成功で「正常終了」扱いにしない)
+3. 復元処理自体が失敗した場合: `conf.py.bak` のパスと手動復元手順を提示して即時例外送出
+4. 編集成功時のみ `conf.py.bak` を削除
 
 これにより「復元したから OK」というサイレントフェイル実装を仕様レベルで防止します。
 
@@ -42,9 +42,9 @@
 
 ### Sphinx 拡張パック
 
-- **必須**: `sphinx-autobuild` (Makefile `livehtml` 依存)
-- **推奨**: `sphinx-copybutton`, `sphinx-design`, `sphinx.ext.intersphinx`, `sphinx.ext.napoleon`
-- **オプショナル**: `sphinx_oceanid` (Mermaid)、`sphinx.ext.autodoc`、`sphinx.ext.viewcode`、`sphinx.ext.todo`、`myst-nb`
+- 必須: `sphinx-autobuild` (Makefile `livehtml` 依存)
+- 推奨: `sphinx-copybutton`, `sphinx-design`, `sphinx.ext.intersphinx`, `sphinx.ext.napoleon`
+- オプショナル: `sphinx_oceanid` (Mermaid)、`sphinx.ext.autodoc`、`sphinx.ext.viewcode`、`sphinx.ext.todo`、`myst-nb`
 
 ## 関連スキル
 

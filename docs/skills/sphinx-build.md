@@ -21,7 +21,7 @@ uv 検出時のコマンド例です。他 PM では `uv run` 部分を `poetry 
 | HTML ビルド | `uv run make -C docs html` |
 | クリーンビルド | `uv run make -C docs clean html` |
 | PDF (英文) | `uv run make -C docs latexpdf` |
-| **PDF (日本語)** | `uv run make -C docs latexpdfja` |
+| PDF (日本語) | `uv run make -C docs latexpdfja` |
 | EPUB | `uv run make -C docs epub` |
 | ライブリロード | `uv run make -C docs livehtml` |
 | ポート指定ライブリロード | `PORT=8003 uv run make -C docs livehtml` |

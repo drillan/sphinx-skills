@@ -24,4 +24,4 @@ rst-to-myst
 | `rst-to-myst` | `sphinx-config` (myst-parser 追加) |
 | `sphinx-build` | `sphinx-config` (拡張不在エラー時の依存追加) |
 
-`conf.py` への変更は **すべて `sphinx-config` の単一責務** に集約されており、バックアップと明示的エラー伝播もここで一元化されます。
+`conf.py` への変更はすべて `sphinx-config` の単一責務に集約されており、バックアップと明示的エラー伝播もここで一元化されます。
