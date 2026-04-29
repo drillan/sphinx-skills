@@ -1,5 +1,9 @@
 # sphinx-skills
 
+[![Docs](https://img.shields.io/badge/docs-online-blue)](https://drillan.github.io/sphinx-skills/)
+
+📖 ドキュメント: <https://drillan.github.io/sphinx-skills/>
+
 Sphinx + MyST ドキュメント開発を支援する Agent Skills パッケージ。GitHub の `gh skill install` コマンドで配布可能。
 
 ## 提供スキル (6個)
