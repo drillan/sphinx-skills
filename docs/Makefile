@@ -9,10 +9,7 @@ help:
 	@echo "  latexpdfja  to make LaTeX files and run them through upLaTeX/dvipdfmx"
 	@echo "  livehtml    to start sphinx-autobuild dev server (PORT=$(PORT))"
 
-.PHONY: help Makefile latexpdfja livehtml
-
-latexpdfja:
-	@$(SPHINXBUILD) -M latexpdfja "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+.PHONY: help Makefile livehtml
 
 livehtml:
 	sphinx-autobuild "$(SOURCEDIR)" "$(BUILDDIR)/html" \
