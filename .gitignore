@@ -1,0 +1,23 @@
+# uv / Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.python-version
+
+# Sphinx build artifacts
+docs/_build/
+**/_build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+# hachimoku
+/.hachimoku/
+
+# 内部ドキュメント (設計仕様書・実装計画はリポジトリに含めない)
+/docs/superpowers/
