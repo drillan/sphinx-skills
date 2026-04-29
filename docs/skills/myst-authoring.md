@@ -1,10 +1,10 @@
 # myst-authoring
 
-MyST Markdown による Sphinx ドキュメント執筆を支援するスキル。ディレクティブ (`{note}`, `{warning}`, `{code-block}`)、ロール (`{ref}`, `{doc}`, `{cite}`)、クロスリファレンス、数式、`sphinx-design` ディレクティブ (`{card}`, `{grid}`, `{tab-set}`) をカバーする。
+MyST Markdown による Sphinx ドキュメント執筆を支援するスキルです。ディレクティブ (`{note}`, `{warning}`, `{code-block}`)、ロール (`{ref}`, `{doc}`, `{cite}`)、クロスリファレンス、数式、`sphinx-design` ディレクティブ (`{card}`, `{grid}`, `{tab-set}`) をカバーします。
 
 ## 発火条件 (MUST trigger)
 
-- `docs/` 配下の `.md` ファイルを編集または作成する **AND**
+- `docs/` 配下の `.md` ファイルを編集または作成する (AND)
 - `docs/conf.py` の `extensions` に `myst_parser` が含まれる場合
 
 または以下:
@@ -58,7 +58,7 @@ $$
 隠された内容。
 ```
 
-`colon_fence` 拡張が有効な場合は `:::{note}` 形式でも同等に動作する。
+`colon_fence` 拡張が有効な場合は `:::{note}` 形式でも同等に動作します。
 
 ### 記法ミス検出パターン
 
@@ -69,12 +69,12 @@ $$
 
 ## 最新仕様の参照
 
-公式ドキュメントから最新の記法を WebFetch で取得可能:
+公式ドキュメントから最新の記法を WebFetch で取得できます。
 
 - MyST core: <https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html>
 - sphinx-design: <https://sphinx-design.readthedocs.io/en/latest/>
 
 ## 関連スキル
 
-- **外部スキル**: 図作成 (Mermaid 等) は `drillan/sphinx-oceanid` の `mermaid-diagram` スキルへ委譲
+- 外部スキル: 図作成 (Mermaid 等) は `drillan/sphinx-oceanid` の `mermaid-diagram` スキルへ委譲
 - 連携: `sphinx-build` (執筆後のビルド確認)、`sphinx-config` (新拡張追加時)
