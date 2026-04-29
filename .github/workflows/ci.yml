@@ -34,6 +34,22 @@ jobs:
       - name: Type check
         run: uv run mypy scripts tests
 
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install APM
+        run: |
+          curl -sSL https://aka.ms/apm-unix | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Audit SKILL.md for hidden Unicode
+        run: |
+          for f in skills/*/SKILL.md; do
+            apm audit --file "$f"
+          done
+
   gh-skill-dry-run:
     runs-on: ubuntu-latest
     needs: validate
