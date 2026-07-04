@@ -30,7 +30,7 @@ allowed-tools: Read, Edit, Bash
 ## 発火条件
 
 - 「拡張機能を追加して」「conf.py を更新」「プロジェクト名を変えたい」「言語設定を変更」
-- 他スキル (sphinx-init, sphinx-theme, rst-to-myst) からの委譲呼出
+- 他スキル (sphinx-init, sphinx-theme, rst-to-myst, revealjs-init, revealjs-config) からの委譲呼出
 
 ## 拡張カタログ (sphinx-init と共有、配布物の自己完結性のためインライン保持)
 
@@ -107,4 +107,4 @@ allowed-tools: Read, Edit, Bash
 ## 関連スキル
 
 - `sphinx-theme` (テーマ変更時に html_theme と html_theme_options の更新で連携)
-- 委譲元: `sphinx-init` (init 時の conf.py 反映)、`rst-to-myst` (変換後 myst-parser 追加)
+- 委譲元: `sphinx-init` (init 時の conf.py 反映)、`rst-to-myst` (変換後 myst-parser 追加)、`revealjs-init`、`revealjs-config`

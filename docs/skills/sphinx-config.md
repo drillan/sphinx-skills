@@ -1,11 +1,11 @@
 # sphinx-config
 
-`docs/conf.py` を既存設定を保持したまま安全に更新するスキルです。Sphinx 拡張、MyST optional extensions、テーマ、プロジェクトメタデータの追加・削除を担います。本スキルは `conf.py` 編集の単一ロジックを保持する役割であり、他スキル (`sphinx-init`, `sphinx-theme`, `rst-to-myst`) からの委譲先となります。
+`docs/conf.py` を既存設定を保持したまま安全に更新するスキルです。Sphinx 拡張、MyST optional extensions、テーマ、プロジェクトメタデータの追加・削除を担います。本スキルは `conf.py` 編集の単一ロジックを保持する役割であり、他スキル (`sphinx-init`, `sphinx-theme`, `rst-to-myst`, `revealjs-init`, `revealjs-config`) からの委譲先となります。
 
 ## 発火条件
 
 - 「拡張機能を追加して」「conf.py を更新」「プロジェクト名を変えたい」「言語設定を変更」
-- 他スキル (`sphinx-init`, `sphinx-theme`, `rst-to-myst`) からの委譲呼出
+- 他スキル (`sphinx-init`, `sphinx-theme`, `rst-to-myst`, `revealjs-init`, `revealjs-config`) からの委譲呼出
 
 ## 責務
 
@@ -49,4 +49,4 @@
 ## 関連スキル
 
 - `sphinx-theme` (テーマ変更時に `html_theme` と `html_theme_options` の更新で連携)
-- 委譲元: `sphinx-init` (init 時の conf.py 反映)、`rst-to-myst` (変換後 myst-parser 追加)
+- 委譲元: `sphinx-init` (init 時の conf.py 反映)、`rst-to-myst` (変換後 myst-parser 追加)、`revealjs-init`、`revealjs-config`
