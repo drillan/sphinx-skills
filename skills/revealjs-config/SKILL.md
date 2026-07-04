@@ -1,6 +1,6 @@
 ---
 name: revealjs-config
-description: Configuration knowledge for sphinx-revealjs in conf.py. Covers revealjs_script_plugins (UMD bundles required, ES module plugin.js does not work), revealjs_css_files (a highlight CSS theme is mandatory for visible syntax highlighting), revealjs_script_conf (slide width/height/slideNumber), theme switching via revealjs_style_theme, SCSS setup with sphinx_revealjs.ext.sass, and sphinx-oceanid (Mermaid) integration including SVG max-height constraints. Triggers when user wants to change slide width, plugins, highlighting, themes, or fix Mermaid overflow in a sphinx-revealjs project. Delegates conf.py editing to sphinx-config.
+description: Configuration knowledge for sphinx-revealjs in conf.py. Covers revealjs_script_plugins (UMD bundles required, ES module plugin.js does not work), revealjs_css_files (a highlight CSS theme is mandatory for visible syntax highlighting), revealjs_script_conf (slide width/height/slideNumber), theme switching via revealjs_style_theme, SCSS setup with sphinx_revealjs.ext.sass, table centering (the bundled reveal.css left-aligns tables with a rule more specific than any theme's margin auto), and sphinx-oceanid (Mermaid) integration including SVG max-height constraints. Triggers when user wants to change slide width, plugins, highlighting, themes, fix left-aligned tables, or fix Mermaid overflow in a sphinx-revealjs project. Delegates conf.py editing to sphinx-config.
 license: MIT
 allowed-tools: Bash, Read, WebFetch
 ---
@@ -77,6 +77,49 @@ revealjs_script_conf = {
     "hash": True,         # URL にスライド位置を反映 (リロード・共有に強い)
 }
 ```
+
+## テーブルの中央寄せ
+
+同梱 reveal.js (5.x) の `dist/reveal.css` には次の規則があり、テーブルとコードブロックの margin を 0 にする:
+
+```css
+html:not(.print-pdf) .reveal pre,
+html:not(.print-pdf) .reveal table { margin-left: 0; margin-right: 0 }
+```
+
+この詳細度は (0,2,2)。テーマ側 (組み込み・カスタムとも) の `.reveal table { margin: auto }` は (0,1,1) で、CSS では読み込み順より詳細度が優先されるため、テーマの選択に関係なく**対策しない限りテーブルは常に左寄せで表示される**。
+
+`.reveal .slides section table` で上書きすると詳細度 (0,2,2) の同点になり、テーマ CSS・追加 CSS は reveal.css より後に読み込まれるため上書き側が勝つ。
+
+SCSS カスタムテーマ使用時は `_sass/custom.scss` に追記する:
+
+```scss
+.reveal {
+  .slides section table {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+```
+
+組み込みテーマのみの場合は `_static/table-center.css` を作成し、`revealjs_css_files` で読み込む:
+
+```css
+/* Center tables within Reveal.js slides */
+.reveal .slides section table {
+  margin-left: auto;
+  margin-right: auto;
+}
+```
+
+```python
+revealjs_css_files = [
+    "revealjs/plugin/highlight/monokai.css",
+    "table-center.css",
+]
+```
+
+なお同じ reveal.css の規則で `pre` の margin も 0 になるが、こちらは「コードブロックの幅最大化」の推奨値 (`width: 100%`) と整合するため上書きしない。
 
 ## SCSS カスタムテーマ (`sphinx_revealjs.ext.sass`)
 
