@@ -219,6 +219,7 @@ revealjs_script_conf = {
 revealjs_css_files = [
     "revealjs/plugin/highlight/monokai.css",
     "oceanid-revealjs.css",
+    # SCSS 非選択時: "table-center.css" (「テーブルの中央寄せ」参照)
 ]
 revealjs_script_plugins = [
     {
