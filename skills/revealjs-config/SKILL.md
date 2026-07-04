@@ -80,11 +80,7 @@ revealjs_script_conf = {
 
 ## SCSS カスタムテーマ (`sphinx_revealjs.ext.sass`)
 
-libsass 依存を追加し、extensions に `sphinx_revealjs.ext.sass` を加えると SCSS からテーマをビルドできる。
-
-```bash
-uv add libsass --group docs  # PM ごとに動的書き換え
-```
+extensions に `sphinx_revealjs.ext.sass` を加えると SCSS からテーマをビルドできる。コンパイラは dart-sass バイナリで、初回ビルド時に GitHub Releases から自動ダウンロードされる (要ネットワークアクセス)。追加の Python 依存 (libsass 等) は不要。
 
 ```python
 extensions = [

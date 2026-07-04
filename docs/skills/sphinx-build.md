@@ -15,7 +15,7 @@
 
 ## プロジェクト種別判定
 
-`docs/Makefile` に `revealjs` ターゲットが存在する場合はスライドプロジェクトとみなし、ターゲット無指定の「ビルドして」を `revealjs` にマッピングします。`livehtml` は Makefile 側で `-b revealjs` 動作となります。
+`docs/Makefile` に `revealjs` ターゲットが存在し、かつ `docs/conf.py` の extensions に `sphinx_revealjs` を含む場合はスライドプロジェクトとみなし、ターゲット無指定の「ビルドして」を `revealjs` にマッピングします。`livehtml` は Makefile 側で `-b revealjs` 動作となります。片方のみ該当する場合は不整合として明示的エラー伝播し、ユーザーに確認します。
 
 ## ターゲットマッピング
 

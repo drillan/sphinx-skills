@@ -49,4 +49,4 @@
 ## 関連スキル
 
 - `sphinx-theme` (テーマ変更時に `html_theme` と `html_theme_options` の更新で連携)
-- 委譲元: `sphinx-init` (init 時の conf.py 反映)、`rst-to-myst` (変換後 myst-parser 追加)、`revealjs-init`、`revealjs-config`
+- 委譲元: `sphinx-init` (init 時の conf.py 反映)、`rst-to-myst` (変換後 myst-parser 追加)、`revealjs-init` (スライド init 時の conf.py 反映)、`revealjs-config` (revealjs_* 設定の反映)

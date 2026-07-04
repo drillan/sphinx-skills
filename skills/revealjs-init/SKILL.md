@@ -90,7 +90,9 @@ uv run sphinx-quickstart -q -p "$PROJECT_NAME" -a "$AUTHOR_NAME" ./docs
 | オプション | 用途 | 選択時の処理 |
 |---|---|---|
 | `sphinx-oceanid` | Mermaid 図 | `uv add sphinx-oceanid --group docs` + extensions へ `sphinx_oceanid` + `_static/oceanid-revealjs.css` 生成 + `revealjs_css_files` へ追加 + `mermaid-diagram` 外部スキルの案内 |
-| SCSS カスタムテーマ | テーマ自作 | `uv add libsass --group docs` + extensions へ `sphinx_revealjs.ext.sass` + `_sass/custom.scss` 雛形生成 + sass 関連設定 (下記) |
+| SCSS カスタムテーマ | テーマ自作 | extensions へ `sphinx_revealjs.ext.sass` + `_sass/custom.scss` 雛形生成 + sass 関連設定 (下記)。コンパイラ (dart-sass) は初回ビルド時に自動ダウンロードされるため要ネットワーク、追加の Python 依存は不要 |
+
+以下の生成ファイルに埋め込む値 (`max-height`、`padding`、`pre` 幅) は `revealjs-config` の推奨値の複製。変更する際は両スキルを同時に更新する。
 
 sphinx-oceanid 選択時に生成する `docs/_static/oceanid-revealjs.css` (縦長ダイアグラムのはみ出し対策):
 
