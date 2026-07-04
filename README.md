@@ -6,16 +6,19 @@
 
 Sphinx + MyST ドキュメント開発を支援する Agent Skills パッケージ。GitHub の `gh skill install` コマンドで配布可能。
 
-## 提供スキル (6個)
+## 提供スキル (9個)
 
 | スキル | 用途 | 自動発火条件 |
 |---|---|---|
 | [`sphinx-init`](skills/sphinx-init/SKILL.md) | プロジェクト初期化 (RST/MyST 選択、Makefile セットアップ) | 「Sphinx 始めたい」「初期化して」 |
 | [`sphinx-config`](skills/sphinx-config/SKILL.md) | conf.py の安全な更新 | 「拡張機能を追加」「conf.py 変更」 |
 | [`sphinx-theme`](skills/sphinx-theme/SKILL.md) | テーマ管理 (Furo / RTD / Shibuya) | 「テーマを変えたい」「ダークモード」 |
-| [`sphinx-build`](skills/sphinx-build/SKILL.md) | Makefile 経由のビルド (HTML / 日本語 PDF / livehtml) | 「ビルドして」「PDF にして」「ライブリロード」 |
+| [`sphinx-build`](skills/sphinx-build/SKILL.md) | Makefile 経由のビルド (HTML / 日本語 PDF / Reveal.js スライド / livehtml) | 「ビルドして」「PDF にして」「ライブリロード」 |
 | [`myst-authoring`](skills/myst-authoring/SKILL.md) | MyST 記法支援 | `.md` 編集時 + `myst_parser` 検出 |
 | [`rst-to-myst`](skills/rst-to-myst/SKILL.md) | 既存 RST プロジェクトの MyST 移行 | 「RST を MyST に変換」 |
+| [`revealjs-init`](skills/revealjs-init/SKILL.md) | スライド専用プロジェクト初期化 (sphinx-revealjs) | 「スライドを作りたい」「発表資料を始めたい」 |
+| [`revealjs-config`](skills/revealjs-config/SKILL.md) | sphinx-revealjs 固有設定の知識 | 「スライドの幅を変えたい」「ハイライトが効かない」 |
+| [`revealjs-authoring`](skills/revealjs-authoring/SKILL.md) | スライド向け MyST 記法ルール | revealjs プロジェクトで `.md` 編集時 |
 
 ## 対象エージェント
 
@@ -27,7 +30,7 @@ Sphinx + MyST ドキュメント開発を支援する Agent Skills パッケー�
 
 ### 推奨: APM (Agent Package Manager) で一括導入
 
-`--target claude` 指定で 1 コマンド導入。`apm.yml`、`apm.lock.yaml`、`.gitignore` が自動生成され、6 スキルが `.claude/skills/` 配下に配置される。
+`--target claude` 指定で 1 コマンド導入。`apm.yml`、`apm.lock.yaml`、`.gitignore` が自動生成され、9 スキルが `.claude/skills/` 配下に配置される。
 
 ```bash
 cd your-python-project
@@ -83,7 +86,7 @@ APM を導入できない環境では `gh skill install` をシェルループ�
 
 ```bash
 cd your-python-project
-for s in sphinx-init sphinx-config sphinx-theme sphinx-build myst-authoring rst-to-myst; do
+for s in sphinx-init sphinx-config sphinx-theme sphinx-build myst-authoring rst-to-myst revealjs-init revealjs-config revealjs-authoring; do
   gh skill install drillan/sphinx-skills "$s" --agent claude-code --scope project
 done
 git add .claude/skills/ && git commit -m "chore: install sphinx-skills"
@@ -140,6 +143,17 @@ User: "開発サーバ立ち上げて、編集したら自動でブラウザ更�
 
 → `sphinx-build` 発火 → `uv run make -C docs livehtml` (sphinx-autobuild) →
    `http://0.0.0.0:8000` で配信 (PORT=8003 等で上書き可)
+
+### F. 発表スライドを作成
+
+```
+User: "sphinx-revealjs で勉強会のスライドを作りたい"
+```
+
+→ `revealjs-init` 発火 → uv 検出 → テーマ選択 (black 等) →
+   オプション選択 (sphinx-oceanid / SCSS) → `sphinx-config` 委譲で conf.py 反映 →
+   Makefile 置換 (revealjs, livehtml, serve) → テストビルド成功 →
+   以後の執筆は `revealjs-authoring`、ビルドは `sphinx-build` が発火
 
 ## 開発・コントリビュート
 
