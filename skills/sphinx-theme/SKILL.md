@@ -1,6 +1,6 @@
 ---
 name: sphinx-theme
-description: Install and configure Sphinx HTML themes (Furo, sphinx_rtd_theme, Shibuya). Fetches latest theme documentation to propose accurate theme-specific html_theme_options. Triggers when user asks to change documentation theme, install a theme, or customize theme appearance options like dark mode, sidebar, navigation.
+description: Install and configure Sphinx HTML themes (Furo, sphinx_rtd_theme, Shibuya). Fetches latest theme documentation to propose accurate theme-specific html_theme_options. Triggers when user asks to change documentation theme, install a theme, or customize theme appearance options like dark mode, sidebar, navigation. Not for Reveal.js slide themes in sphinx-revealjs projects (revealjs_style_theme) - delegate those to revealjs-config.
 license: MIT
 allowed-tools: Bash, WebFetch, Read, Edit
 ---
@@ -14,7 +14,7 @@ allowed-tools: Bash, WebFetch, Read, Edit
 | 1 | `uv.lock` が存在 | uv |
 | 2 | `poetry.lock` が存在 | poetry |
 | 3 | `Pipfile.lock` が存在 | pipenv |
-| 4 | `.venv/` のみ存在 | plain venv |
+| 4 | `.venv/` のみ存在 (lockfile なし) | plain venv |
 | 5 | 上記すべて該当しない | ユーザー問い合わせ (推奨: uv) |
 
 依存追加コマンド対応:
@@ -69,6 +69,7 @@ WebFetch で公式ドキュメントから最新の `html_theme_options` 仕様�
 - カスタム CSS / 静的アセット配置 (`_static/` 配下、LLM 一般判断領域)
 - ロゴ・favicon 設定 (テーマ非依存の Sphinx 一般機能)
 - テーマ間のオプション互換変換 (例: rtd → furo の自動オプション翻訳)
+- sphinx_revealjs プロジェクトのスライドテーマ (`revealjs_style_theme`) — `html_theme` はスライド出力に影響しないため `revealjs-config` へ委譲
 
 ## 関連スキル
 
