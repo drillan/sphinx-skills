@@ -1,6 +1,6 @@
 ---
 name: rst-to-myst
-description: Migrate an existing reStructuredText (.rst) Sphinx documentation project to MyST Markdown (.md) using the rst-to-myst tool. Designed for projects with substantial RST content (multiple files, custom directives, real documentation), NOT for sphinx-quickstart boilerplate. Validates conversion output before deleting originals. Triggers when user asks to migrate RST documentation to MyST, or when the project has multiple .rst files with content beyond the sphinx-quickstart skeleton.
+description: 既存の reStructuredText 製 Sphinx ドキュメントを rst-to-myst で MyST Markdown へ移行するスキル。実質的な RST コンテンツを持つプロジェクトの移行を求められたときに使用する(sphinx-quickstart の雛形だけの場合は対象外)。変換結果を検証してから元ファイルを削除する。
 license: MIT
 allowed-tools: Bash, Read, Write
 ---

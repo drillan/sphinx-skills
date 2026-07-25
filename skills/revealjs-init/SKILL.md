@@ -1,6 +1,6 @@
 ---
 name: revealjs-init
-description: Initialize a dedicated presentation slide project using sphinx-revealjs. Detects the package manager (uv/poetry/pipenv/plain venv), adds dependencies, scaffolds docs/ with a MyST slide template, offers built-in Reveal.js theme selection plus optional sphinx-oceanid (Mermaid) and SCSS custom theme, and installs a Makefile with revealjs/livehtml/serve targets. Triggers when user asks to create presentation slides or start a slide project with Sphinx. Requires a project without an existing docs/ directory.
+description: sphinx-revealjs によるスライド専用プロジェクトを初期化するスキル。docs/ が未作成のプロジェクトで発表スライドの新規作成を求められたときに使用する。依存追加・MyST テンプレート生成・テーマ選定・Makefile 整備までを行う。
 license: MIT
 allowed-tools: Bash, Read, Write, Edit, WebFetch
 ---

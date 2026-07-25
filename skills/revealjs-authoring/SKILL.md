@@ -1,6 +1,6 @@
 ---
 name: revealjs-authoring
-description: MyST notation rules for writing presentation slides with sphinx-revealjs. Heading levels define slide structure (h1 = title slide, h2 = section separator, h3 = individual slide). Enforces list-table with 3 columns max, two-column split layouts via nested list-table, literalinclude for code over 5 lines, Mermaid directive usage with sphinx-oceanid supported types, concise admonitions, definition lists, and colon-fence style. MUST trigger when editing or creating .md files under docs/ in a project where docs/conf.py contains sphinx_revealjs in extensions. Complements myst-authoring with slide-specific constraints.
+description: sphinx-revealjs のスライドを MyST で書くための記法ルール(見出しレベルによるスライド分割、list-table、2 カラムレイアウト等)。extensions に sphinx_revealjs があるプロジェクトで docs/ 配下の .md を編集・作成するときに使用する。汎用 MyST 記法は myst-authoring が担当。
 license: MIT
 allowed-tools: Read, Grep, Glob
 ---

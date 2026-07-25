@@ -1,6 +1,6 @@
 ---
 name: myst-authoring
-description: Provide MyST Markdown authoring assistance for Sphinx documentation. Covers directives ({note}, {warning}, {code-block}), roles ({ref}, {doc}, {cite}), cross-references, math notation, and sphinx-design directives ({card}, {grid}, {tab-set}). MUST trigger when editing or creating .md files under docs/ in a project where docs/conf.py contains 'myst_parser' in extensions. Also triggers when user asks about MyST syntax, directives, or roles in Sphinx context.
+description: Sphinx ドキュメントの MyST Markdown 執筆支援スキル(ディレクティブ・ロール・相互参照・数式・sphinx-design)。extensions に myst_parser があるプロジェクトで docs/ 配下の .md を編集・作成するときや、MyST 記法について質問されたときに使用する。
 license: MIT
 allowed-tools: Read, Edit, WebFetch
 ---

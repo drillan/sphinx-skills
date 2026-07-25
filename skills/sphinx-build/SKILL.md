@@ -1,6 +1,6 @@
 ---
 name: sphinx-build
-description: Build Sphinx documentation via Makefile targets. Supports HTML, clean rebuild, Japanese PDF (latexpdfja), EPUB, link checking, live-reload development server (livehtml), and Reveal.js slide builds (revealjs). Detects slide projects by the revealjs target in docs/Makefile combined with the sphinx_revealjs extension in conf.py, and maps generic build/preview requests to the revealjs builder. Detects the project's package manager (uv/poetry/pipenv/plain venv) and uses the appropriate run command. Interprets common build errors and suggests fixes. Triggers when user asks to build documentation or slides, generate HTML/PDF/EPUB, run dev server with live reload, or check links.
+description: Sphinx ドキュメント・スライドを Makefile 経由でビルドするスキル(HTML・latexpdfja・EPUB・linkcheck・livehtml・revealjs)。ドキュメントやスライドのビルド・プレビュー・開発サーバー起動・リンクチェックを求められたときに使用する。パッケージマネージャ検出とビルドエラーの解釈は本文参照。
 license: MIT
 allowed-tools: Bash, Read
 ---

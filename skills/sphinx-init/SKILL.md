@@ -1,6 +1,6 @@
 ---
 name: sphinx-init
-description: Initialize a new Sphinx documentation project. Detects the project's package manager (uv recommended; supports poetry, pipenv, plain venv) and uses it for dependency installation. Supports RST or MyST (Markdown) syntax selection. Triggers when user asks to start, create, or initialize Sphinx documentation in a Python project. Sets up MyST optional extensions, popular Sphinx extensions, and a customized Makefile with livehtml and latexpdfja targets.
+description: Sphinx ドキュメントプロジェクトを初期化するスキル。Python プロジェクトでドキュメントの新規作成・導入を求められたときに使用する。パッケージマネージャ検出、RST/MyST の選択、拡張と Makefile(livehtml・latexpdfja)の整備までを行う。
 license: MIT
 allowed-tools: Bash, Read, Write, Edit, WebFetch
 ---

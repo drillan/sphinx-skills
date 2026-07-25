@@ -1,6 +1,6 @@
 ---
 name: sphinx-theme
-description: Install and configure Sphinx HTML themes (Furo, sphinx_rtd_theme, Shibuya). Fetches latest theme documentation to propose accurate theme-specific html_theme_options. Triggers when user asks to change documentation theme, install a theme, or customize theme appearance options like dark mode, sidebar, navigation. Not for Reveal.js slide themes in sphinx-revealjs projects (revealjs_style_theme) - delegate those to revealjs-config.
+description: Sphinx の HTML テーマ(Furo・sphinx_rtd_theme・Shibuya)を導入・設定するスキル。ドキュメントのテーマ変更やダークモード・サイドバー等の外観カスタマイズを求められたときに使用する。sphinx-revealjs のスライドテーマは revealjs-config が担当。
 license: MIT
 allowed-tools: Bash, WebFetch, Read, Edit
 ---

@@ -1,6 +1,6 @@
 ---
 name: sphinx-config
-description: Safely update docs/conf.py while preserving existing settings. Add or remove Sphinx extensions, MyST optional extensions, theme, project metadata. Triggers when user asks to add an extension, change project name/author/release, modify conf.py, or update Sphinx configuration.
+description: docs/conf.py を既存設定を保ちながら安全に更新するスキル。Sphinx 拡張の追加・削除、テーマ、プロジェクトメタデータなど conf.py の変更を求められたときに使用する。
 license: MIT
 allowed-tools: Read, Edit, Bash
 ---

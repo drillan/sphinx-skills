@@ -1,6 +1,6 @@
 ---
 name: revealjs-config
-description: Configuration knowledge for sphinx-revealjs in conf.py. Covers revealjs_script_plugins (UMD bundles required, ES module plugin.js does not work), revealjs_css_files (a highlight CSS theme is mandatory for visible syntax highlighting), revealjs_script_conf (slide width/height/slideNumber), theme switching via revealjs_style_theme, SCSS setup with sphinx_revealjs.ext.sass, table centering (the bundled reveal.css left-aligns tables with a rule more specific than any theme's margin auto), and sphinx-oceanid (Mermaid) integration including SVG max-height constraints. Triggers when user wants to change slide width, plugins, highlighting, themes, fix left-aligned tables, or fix Mermaid overflow in a sphinx-revealjs project. Delegates conf.py editing to sphinx-config.
+description: sphinx-revealjs の conf.py 設定(プラグイン・コードハイライト・テーマ・スライド寸法・表の中央寄せ・Mermaid 統合)の知識を提供するスキル。sphinx-revealjs プロジェクトでスライドの見た目や挙動を変更・修正するときに使用する。conf.py 編集の実行は sphinx-config に委譲する。
 license: MIT
 allowed-tools: Bash, Read, WebFetch
 ---
