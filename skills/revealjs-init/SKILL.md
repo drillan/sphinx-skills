@@ -90,11 +90,25 @@ uv run sphinx-quickstart -q -p "$PROJECT_NAME" -a "$AUTHOR_NAME" ./docs
 | オプション | 用途 | 選択時の処理 |
 |---|---|---|
 | `sphinx-oceanid` | Mermaid 図 | `uv add sphinx-oceanid --group docs` + extensions へ `sphinx_oceanid` + `_static/oceanid-revealjs.css` 生成 + `revealjs_css_files` へ追加 + `mermaid-diagram` 外部スキルの案内 |
+| `sphinx-revealjs-admonitions` | Admonition をスライド化 | git URL で依存追加 (下記) + extensions へ `sphinx_revealjs_admonitions` + `_static/slide-admonition.css` 生成 + `revealjs_css_files` へ追加 + `revealjs-authoring` の `:class: slide` 記法を案内 |
 | SCSS カスタムテーマ | テーマ自作 | extensions へ `sphinx_revealjs.ext.sass` + `_sass/custom.scss` 雛形生成 + sass 関連設定 (下記)。コンパイラ (dart-sass) は初回ビルド時に自動ダウンロードされるため要ネットワーク、追加の Python 依存は不要 |
+
+`sphinx-revealjs-admonitions` は `requires-python = ">=3.13"` を宣言する。対象プロジェクトが Python 3.13 未満ならこのオプションは提示せず、その理由を伝える (提示して解決エラーを踏ませない)。
+
+PyPI 未公開のため git URL で追加する。上表の処理は PM ごとに以下へ書き換える:
+
+| PM | コマンド |
+|---|---|
+| uv | `uv add "git+https://github.com/drillan/sphinx-revealjs-admonitions.git" --group docs` |
+| poetry | `poetry add --group docs "git+https://github.com/drillan/sphinx-revealjs-admonitions.git"` |
+| pipenv | `pipenv install --dev "git+https://github.com/drillan/sphinx-revealjs-admonitions.git#egg=sphinx-revealjs-admonitions"` |
+| plain venv | `pip install "git+https://github.com/drillan/sphinx-revealjs-admonitions.git"` |
+
+upstream に tag は存在しないため、pin する場合は commit SHA を使う (`...admonitions@<commit-sha>`)。
 
 オプション提示時に、SCSS 非選択の場合はテーブル中央寄せ対処の `_static/table-center.css` を自動生成する旨も合わせて伝える (選択式ではなく既定の対処。SCSS 選択時は `custom.scss` 内の規則が同じ役割を担う)。
 
-以下の生成ファイルに埋め込む値 (`max-height`、`padding`、`pre` 幅、テーブル中央寄せ) は `revealjs-config` の推奨値の複製。変更する際は両スキルを同時に更新する。
+以下の生成ファイルに埋め込む値 (`max-height`、`padding`、`pre` 幅、テーブル中央寄せ、`.admonition.slide` のスタイル) は `revealjs-config` の推奨値の複製。変更する際は両スキルを同時に更新する。
 
 sphinx-oceanid 選択時に生成する `docs/_static/oceanid-revealjs.css` (縦長ダイアグラムのはみ出し対策):
 
@@ -104,6 +118,39 @@ sphinx-oceanid 選択時に生成する `docs/_static/oceanid-revealjs.css` (縦
   max-height: 500px;
 }
 ```
+
+`sphinx-revealjs-admonitions` 選択時に生成する `docs/_static/slide-admonition.css` (マークした Admonition にスライド1枚分の領域を与える):
+
+```css
+/* Give a marked admonition the room to fill the slide */
+.reveal .admonition.slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 60vh;
+  padding: 1.2em 1.5em;
+  border-left: 0.25em solid currentColor;
+  border-radius: 0.2em;
+  background: rgba(127, 127, 127, 0.12);
+  text-align: left;
+}
+
+.reveal .admonition.slide > .admonition-title {
+  margin: 0 0 0.6em;
+  font-weight: 700;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+.reveal .admonition.slide > p:last-child {
+  margin-bottom: 0;
+}
+```
+
+セレクタは必ず `.admonition.slide` の複合形にする (素の `.slide` は Reveal.js がデッキのラッパーに付けるトランジション名にも当たる。根拠は `revealjs-config` の「Admonition のスライド化」参照)。このファイルは詳細度の競合を解消するものではなく任意の装飾なので、SCSS 選択時も `custom.scss` へ畳み込まず独立した CSS のまま `revealjs_css_files` で読み込む。
 
 SCSS 非選択時に生成する `docs/_static/table-center.css` (同梱 reveal.css がテーマより詳細度の高い規則でテーブルを左寄せにするため。根拠は `revealjs-config` の「テーブルの中央寄せ」参照):
 
@@ -195,6 +242,7 @@ extensions = [
     "myst_parser",
     "sphinx_revealjs",
     # sphinx-oceanid 選択時: "sphinx_oceanid"
+    # sphinx-revealjs-admonitions 選択時: "sphinx_revealjs_admonitions"
     # SCSS 選択時: "sphinx_revealjs.ext.sass"
 ]
 myst_enable_extensions = ["colon_fence", "deflist", "tasklist"]
@@ -209,6 +257,7 @@ revealjs_script_conf = {
 revealjs_css_files = [
     "revealjs/plugin/highlight/monokai.css",
     # sphinx-oceanid 選択時: "oceanid-revealjs.css"
+    # sphinx-revealjs-admonitions 選択時: "slide-admonition.css"
     # SCSS 非選択時: "table-center.css"
 ]
 revealjs_script_plugins = [
@@ -268,3 +317,4 @@ uv run make -C docs revealjs
 - **知識参照**: `revealjs-config` (sphinx-revealjs 固有設定の根拠と落とし穴)
 - **完了後**: `sphinx-build` (revealjs ビルド・プレビュー)、`revealjs-authoring` (スライド執筆時に自動発火)
 - **外部スキル**: sphinx-oceanid 選択時は `drillan/sphinx-oceanid` の `mermaid-diagram` を別途インストール
+- **外部拡張**: `sphinx-revealjs-admonitions` 選択時は `:class: slide` の記法ルールを `revealjs-authoring`、スタイルと設定を `revealjs-config` が扱う

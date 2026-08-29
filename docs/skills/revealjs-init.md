@@ -13,7 +13,7 @@ sphinx-revealjs によるスライド専用プロジェクトを初期化する�
 2. 依存追加 — `sphinx` `sphinx-revealjs` `myst-parser` `sphinx-autobuild` を docs グループへ
 3. `sphinx-quickstart` で docs/ を生成し、`index.rst` をスライド雛形 `index.md` に置き換え
 4. テーマ選択 — Reveal.js 組み込みテーマ (black / white / league / beige / night / serif / simple / solarized / moon / blood / sky) から選択
-5. オプション選択 — `sphinx-oceanid` (Mermaid 図 + はみ出し対策 CSS)、SCSS カスタムテーマ (`sphinx_revealjs.ext.sass` + `_sass/custom.scss` 雛形。コンパイラの dart-sass は初回ビルド時に自動取得)。SCSS 非選択時はテーブル中央寄せ対処の `_static/table-center.css` を自動生成します
+5. オプション選択 — `sphinx-oceanid` (Mermaid 図 + はみ出し対策 CSS)、`sphinx-revealjs-admonitions` (`:class: slide` による Admonition のスライド化 + `_static/slide-admonition.css`。Python 3.13 以上が必要、PyPI 未公開のため git URL で追加)、SCSS カスタムテーマ (`sphinx_revealjs.ext.sass` + `_sass/custom.scss` 雛形。コンパイラの dart-sass は初回ビルド時に自動取得)。SCSS 非選択時はテーブル中央寄せ対処の `_static/table-center.css` を自動生成します
 6. conf.py 反映 — `sphinx-config` スキルへ委譲 (推奨値: width 1200 / height 700、highlight プラグイン + monokai.css)
 7. Makefile 置換 — `revealjs` / `livehtml` (`sphinx-autobuild -b revealjs`) / `serve` ターゲット
 8. テストビルド — `uv run make -C docs revealjs`。失敗時は明示的エラー伝播で停止します
@@ -23,3 +23,4 @@ sphinx-revealjs によるスライド専用プロジェクトを初期化する�
 - 委譲先: `sphinx-config` (conf.py 編集)、知識参照: `revealjs-config`
 - 完了後: `sphinx-build` (ビルド)、`revealjs-authoring` (執筆時自動発火)
 - 外部スキル: sphinx-oceanid 選択時は `drillan/sphinx-oceanid` の `mermaid-diagram`
+- 外部拡張: `sphinx-revealjs-admonitions` 選択時は記法を `revealjs-authoring`、スタイルと設定を `revealjs-config` が扱う

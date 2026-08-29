@@ -270,6 +270,33 @@ flowchart TD
 :::
 ```
 
+## Admonition のスライド化 (sphinx-revealjs-admonitions 導入時のみ)
+
+extensions に `sphinx_revealjs_admonitions` がある場合に適用する。強調したい注意点や結論を1枚のスライドとして見せたいときは、Admonition に `:class: slide` を付ける。付けなければ従来どおり本文中に inline で表示される。
+
+- スライド1枚を占めるため、内容は主張1つに絞る。文量の目安は inline の Admonition と同じく1〜3行
+- マークできるのは `:class:` オプションを受け取り、かつ Admonition ノードを生成するディレクティブ: `note` / `warning` / `tip` / `danger` / `caution` / `attention` / `error` / `hint` / `important` / `seealso` / 汎用 `admonition`
+- `versionadded` / `deprecated` は `:class:` オプションを受け取らないためマークできない
+- 見た目の調整 (`.admonition.slide` の CSS) は `revealjs-config` スキル参照
+
+### 正しい記法
+
+```markdown
+:::{warning}
+:class: slide
+
+この操作は取り消せない
+:::
+```
+
+### 配置の制約
+
+- マークした Admonition は**セクションの直接の子**である必要がある。リスト項目やブロック引用の中に置いた場合、ビルドは警告を出し、分割せず inline のまま残す (`-W` ビルドでは失敗する)
+- 分割されたスライドは `id` を持たないため、個別の URL でリンクできない (`revealjs-break` ディレクティブと同じ挙動)
+- `revealjs_notes_from_comments` 有効時、マークした Admonition の直後に書いたコメントのスピーカーノートは**次のスライド**に付く。分割用の区切りが Admonition とコメントの間に入るため。Admonition 自身のスライドにノートを付ける手段は upstream に記載が無いので、この配置でノートを書くときは付き先を確認する
+- `revealjs-section` の `:data-background-color:` 等の `data-*` 属性はセクションの最初のスライドにしか適用されない。背景を指定したセクション内で Admonition をマークすると、分割後のスライドはその背景を失う
+- 3階層より深い見出しの下では sphinx-revealjs 自体がスライドを開かないため、マークした Admonition に続く兄弟セクションが同じスライドに吸収される (拡張の有無に関わらない sphinx-revealjs の挙動)
+
 ## 定義リスト
 
 用語や概念の説明は定義リスト構文で記述する。箇条書きの `- **用語**: 説明` で代用しない。
@@ -316,4 +343,4 @@ SDD
 ## 関連スキル
 
 - **姉妹スキル**: `myst-authoring` (汎用 MyST ルール)
-- **連携**: `revealjs-config` (Mermaid の高さ制約等、設定側の対処)、`sphinx-build` (プレビューによるはみ出し確認)
+- **連携**: `revealjs-config` (Mermaid の高さ制約・`.admonition.slide` のスタイル等、設定側の対処)、`sphinx-build` (プレビューによるはみ出し確認)

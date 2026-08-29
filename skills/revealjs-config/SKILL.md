@@ -1,6 +1,6 @@
 ---
 name: revealjs-config
-description: sphinx-revealjs の conf.py 設定(プラグイン・コードハイライト・テーマ・スライド寸法・表の中央寄せ・Mermaid 統合)の知識を提供するスキル。sphinx-revealjs プロジェクトでスライドの見た目や挙動を変更・修正するときに使用する。conf.py 編集の実行は sphinx-config に委譲する。
+description: sphinx-revealjs の conf.py 設定(プラグイン・コードハイライト・テーマ・スライド寸法・表の中央寄せ・Admonition のスライド化・Mermaid 統合)の知識を提供するスキル。sphinx-revealjs プロジェクトでスライドの見た目や挙動を変更・修正するときに使用する。conf.py 編集の実行は sphinx-config に委譲する。
 license: MIT
 allowed-tools: Bash, Read, WebFetch
 ---
@@ -8,7 +8,7 @@ allowed-tools: Bash, Read, WebFetch
 ## 発火条件
 
 - extensions に `sphinx_revealjs` があるプロジェクトで conf.py の revealjs 設定変更を求められた場合
-- 「スライドの幅を変えたい」「プラグインを追加したい」「コードハイライトが効かない」「Mermaid がスライドからはみ出す」「スライドのテーマを変えたい」
+- 「スライドの幅を変えたい」「プラグインを追加したい」「コードハイライトが効かない」「Mermaid がスライドからはみ出す」「スライドのテーマを変えたい」「Admonition を独立したスライドにしたい」
 
 ## 前提検証
 
@@ -198,6 +198,86 @@ revealjs_css_files = [
 ]
 ```
 
+## Admonition のスライド化 (sphinx-revealjs-admonitions)
+
+`sphinx-revealjs-admonitions` 拡張を導入すると、`:class: slide` を付けた Admonition が独立したスライドになる。記法側のルール (マーク可能な種別・配置制約) は `revealjs-authoring` スキルが持つ。
+
+### インストール
+
+拡張は `requires-python = ">=3.13"` を宣言する。対象プロジェクトが Python 3.13 未満の場合は導入できないため、解決エラーを待たずに前提検証の段階で停止し報告する。
+
+PyPI 未公開のため git URL で追加する (以下は uv の例。PM ごとの書き換えは `revealjs-init` の対応表を参照):
+
+```bash
+uv add "git+https://github.com/drillan/sphinx-revealjs-admonitions.git" --group docs
+```
+
+CI や production で再現性が必要な場合は commit SHA で pin する。upstream に tag は存在しないため、バージョン番号による pin はできない。
+
+```bash
+uv add "git+https://github.com/drillan/sphinx-revealjs-admonitions.git@<commit-sha>" --group docs
+```
+
+### conf.py
+
+```python
+extensions = [
+    "sphinx_revealjs",
+    "sphinx_revealjs_admonitions",
+]
+```
+
+拡張固有の設定項目は無い。実体は `revealjs_break` ノードを挿入する post-transform なので、ビルドコマンド (`sphinx-build -b revealjs`) も中間生成物も変わらない。
+
+### スタイル指定 — `.admonition.slide` 複合セレクタ必須
+
+マーカーはレンダリング後の要素に残り、`<div class="slide admonition note">` の形になる。この `slide` クラスがそのまま CSS フックになる。
+
+**素の `.slide` セレクタは使用禁止。** Reveal.js はトランジション名をデッキのラッパー要素に付与し (既定のトランジションが `slide` のため `<div class="reveal slide ...">`)、素の `.slide` はデッキ全体にも当たる。必ず `.admonition.slide` と複合セレクタで書く。
+
+`_static/slide-admonition.css` を作成し、`revealjs_css_files` で読み込む:
+
+```css
+/* Give a marked admonition the room to fill the slide */
+.reveal .admonition.slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 60vh;
+  padding: 1.2em 1.5em;
+  border-left: 0.25em solid currentColor;
+  border-radius: 0.2em;
+  background: rgba(127, 127, 127, 0.12);
+  text-align: left;
+}
+
+.reveal .admonition.slide > .admonition-title {
+  margin: 0 0 0.6em;
+  font-weight: 700;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.75;
+}
+
+.reveal .admonition.slide > p:last-child {
+  margin-bottom: 0;
+}
+```
+
+```python
+revealjs_static_path = ["_static"]
+revealjs_css_files = [
+    "revealjs/plugin/highlight/monokai.css",
+    "slide-admonition.css",
+]
+```
+
+`revealjs_static_path` を既に設定している場合は上書きせず追記する。
+
+この CSS は拡張のパッケージに同梱されない。上書き前提の出発点であり依存ではない。テーブルの中央寄せと違って詳細度の競合を解消するものではなく任意の装飾なので、SCSS カスタムテーマ使用時も `custom.scss` に畳み込まず独立した CSS のまま扱ってよい (畳み込む場合はセレクタをそのまま移す)。
+
 ## 設定例
 
 ```python
@@ -206,6 +286,7 @@ extensions = [
     "myst_parser",
     "sphinx_revealjs",
     "sphinx_oceanid",
+    # Admonition のスライド化を使う場合: "sphinx_revealjs_admonitions"
 ]
 
 revealjs_style_theme = "black"
@@ -220,6 +301,7 @@ revealjs_css_files = [
     "revealjs/plugin/highlight/monokai.css",
     "oceanid-revealjs.css",
     # SCSS 非選択時: "table-center.css" (「テーブルの中央寄せ」参照)
+    # sphinx-revealjs-admonitions 導入時: "slide-admonition.css"
 ]
 revealjs_script_plugins = [
     {
@@ -237,4 +319,4 @@ revealjs_script_plugins = [
 
 - **委譲先**: `sphinx-config` (conf.py 編集の実行)
 - **前提**: `revealjs-init` (プロジェクト未初期化なら誘導)
-- **連携**: `revealjs-authoring` (Mermaid の記法側ルール)
+- **連携**: `revealjs-authoring` (Mermaid と `:class: slide` の記法側ルール)
