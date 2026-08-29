@@ -12,6 +12,7 @@ sphinx-revealjs スライドを執筆する際の MyST 記法ルールを提供�
 | コード | 5行超・外部ファイルは `{literalinclude}` + `:language:` 必須 |
 | Mermaid | `{mermaid}` ディレクティブ (ASCII アート禁止)。対応タイプ: flowchart / sequenceDiagram / stateDiagram-v2 / classDiagram / erDiagram / xychart-beta |
 | Admonition | note / tip / warning / important / seealso を1〜3行で簡潔に |
+| Admonition のスライド化 | `sphinx-revealjs-admonitions` 導入時のみ。`:class: slide` で独立スライドに。**セクションの直接の子**である必要があり、リスト項目等の中では警告を出して inline のまま残る (`-W` で失敗) |
 | 定義リスト | 「用語: 説明」は定義リスト構文。箇条書きで代用しない |
 | 一般 | ディレクティブはコロンフェンス `:::` 統一。はみ出したらプレビューで確認して分割 |
 

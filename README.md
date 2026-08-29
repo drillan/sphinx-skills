@@ -17,7 +17,7 @@ Sphinx + MyST ドキュメント開発を支援する Agent Skills パッケー�
 | [`myst-authoring`](skills/myst-authoring/SKILL.md) | MyST 記法支援 | `.md` 編集時 + `myst_parser` 検出 |
 | [`rst-to-myst`](skills/rst-to-myst/SKILL.md) | 既存 RST プロジェクトの MyST 移行 | 「RST を MyST に変換」 |
 | [`revealjs-init`](skills/revealjs-init/SKILL.md) | スライド専用プロジェクト初期化 (sphinx-revealjs) | 「スライドを作りたい」「発表資料を始めたい」 |
-| [`revealjs-config`](skills/revealjs-config/SKILL.md) | sphinx-revealjs 固有設定の知識 | 「スライドの幅を変えたい」「ハイライトが効かない」 |
+| [`revealjs-config`](skills/revealjs-config/SKILL.md) | sphinx-revealjs 固有設定の知識 | 「スライドの幅を変えたい」「ハイライトが効かない」「Admonition をスライドに」 |
 | [`revealjs-authoring`](skills/revealjs-authoring/SKILL.md) | スライド向け MyST 記法ルール | revealjs プロジェクトで `.md` 編集時 |
 
 ## 対象エージェント
@@ -151,7 +151,7 @@ User: "sphinx-revealjs で勉強会のスライドを作りたい"
 ```
 
 → `revealjs-init` 発火 → uv 検出 → テーマ選択 (black 等) →
-   オプション選択 (sphinx-oceanid / SCSS) → `sphinx-config` 委譲で conf.py 反映 →
+   オプション選択 (sphinx-oceanid / sphinx-revealjs-admonitions / SCSS) → `sphinx-config` 委譲で conf.py 反映 →
    Makefile 置換 (revealjs, livehtml, serve) → テストビルド成功 →
    以後の執筆は `revealjs-authoring`、ビルドは `sphinx-build` が発火
 
@@ -174,6 +174,7 @@ uv run mypy scripts tests
 ### 関連プロジェクト
 
 - [drillan/sphinx-oceanid](https://github.com/drillan/sphinx-oceanid) — Mermaid 図対応の Sphinx 拡張 + 専用 mermaid-diagram スキル
+- [drillan/sphinx-revealjs-admonitions](https://github.com/drillan/sphinx-revealjs-admonitions) — `:class: slide` を付けた Admonition を独立スライドとして描画する sphinx-revealjs 拡張。`revealjs-init` の選択式オプション、記法は `revealjs-authoring`、設定とスタイルは `revealjs-config` が扱う
 
 ## ライセンス
 
